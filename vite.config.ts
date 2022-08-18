@@ -1,9 +1,9 @@
-import { UserConfig } from 'vite';
-import react from '@vitejs/plugin-react';
+import type { UserConfig } from 'vite';
 import css from 'unocss/vite';
 import { join as pathJoin } from 'path';
 import autoImport from 'unplugin-auto-import/vite';
 import Inspect from 'vite-plugin-inspect';
+import { sveltekit } from '@sveltejs/kit/vite';
 
 export default {
   server: {
@@ -17,24 +17,12 @@ export default {
     },
   },
   plugins: [
-    react(),
+    sveltekit(),
     css(),
     autoImport({
       dts: 'src/auto-imports.d.ts',
       imports: [
-        'react',
-        'react-router-dom',
-        {
-          mobx: ['makeAutoObservable'],
-          'mobx-react-lite': [
-            'useLocalObservable',
-            'observer',
-          ],
-          '/src/hooks/O': [['default', 'O']],
-          'mobx-state-tree': [
-            ['types', 'typex'],
-          ],
-        },
+        'svelte',
       ],
     }),
     Inspect(),
